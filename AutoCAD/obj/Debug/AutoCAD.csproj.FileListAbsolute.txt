@@ -1,0 +1,9 @@
+C:\Users\minhg\Downloads\Projects\NET\autocad\AutoCAD\AutoCAD\bin\Debug\start.scr
+C:\Users\minhg\Downloads\Projects\NET\autocad\AutoCAD\AutoCAD\bin\Debug\AutoCAD.dll
+C:\Users\minhg\Downloads\Projects\NET\autocad\AutoCAD\AutoCAD\bin\Debug\AutoCAD.pdb
+C:\Users\minhg\Downloads\Projects\NET\autocad\AutoCAD\AutoCAD\obj\Debug\AutoCAD.csproj.AssemblyReference.cache
+C:\Users\minhg\Downloads\Projects\NET\autocad\AutoCAD\AutoCAD\obj\Debug\AutoCAD.MyCommands.resources
+C:\Users\minhg\Downloads\Projects\NET\autocad\AutoCAD\AutoCAD\obj\Debug\AutoCAD.csproj.GenerateResource.cache
+C:\Users\minhg\Downloads\Projects\NET\autocad\AutoCAD\AutoCAD\obj\Debug\AutoCAD.csproj.CoreCompileInputs.cache
+C:\Users\minhg\Downloads\Projects\NET\autocad\AutoCAD\AutoCAD\obj\Debug\AutoCAD.dll
+C:\Users\minhg\Downloads\Projects\NET\autocad\AutoCAD\AutoCAD\obj\Debug\AutoCAD.pdb
