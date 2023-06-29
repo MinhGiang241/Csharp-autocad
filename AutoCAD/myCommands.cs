@@ -7,6 +7,9 @@ using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.Runtime;
 
+
+using AcAp = Autodesk.AutoCAD.ApplicationServices.Application;
+
 // This line is not mandatory, but improves loading performances
 [assembly: CommandClass(typeof(AutoCAD.MyCommands))]
 
@@ -82,15 +85,20 @@ namespace AutoCAD
         [CommandMethod("TEST")]
         public void Test()
         {
-            Document doc = Application.DocumentManager.MdiActiveDocument;
+            Document doc = AcAp.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;
-                using (var tr = db.TransactionManager.StartTransaction())
-            {
-                tr.Commit();
-            }
-
             ed.WriteMessage("Hello C# minhginag ");
+        }
+
+        [CommandMethod("MySave")]
+        public void IsSaveFile()
+        {
+            Document doc = AcAp.DocumentManager.MdiActiveDocument;
+            var db = doc.Database;
+            var ed = doc.Editor;
+
+            ed.WriteMessage("/n Xin chào Minh Giang");
         }
 
     }
