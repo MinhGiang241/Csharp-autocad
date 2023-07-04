@@ -7,6 +7,8 @@ using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.Runtime;
 
+using AcAp = Autodesk.AutoCAD.ApplicationServices.Application;
+
 // This line is not mandatory, but improves loading performances
 [assembly: ExtensionApplication(typeof(AutoCAD.MyPlugin))]
 
@@ -38,6 +40,10 @@ namespace AutoCAD
             // as well as some of the existing AutoCAD managed apps.
 
             // Initialize your plug-in application here
+
+            Editor ed = AcAp.DocumentManager.MdiActiveDocument.Editor;
+            AcAp.MainWindow.Text = "minhgiang241";
+
         }
 
         void IExtensionApplication.Terminate()

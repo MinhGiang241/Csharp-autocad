@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Autodesk.AutoCAD.ApplicationServices;
+using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Internal;
 using Autodesk.AutoCAD.Runtime;
@@ -77,6 +78,76 @@ namespace AutoCAD
             }
         }
 
-     
+        [CommandMethod("LoginName")]
+        public void showLoginName()
+        {
+            Editor ed = AcAp.DocumentManager.MdiActiveDocument.Editor;
+            string loginName = AcAp.GetSystemVariable("loginName").ToString();
+            ed.WriteMessage(loginName);
+
+        }
+
+        [CommandMethod("trycat")]
+        public void trycatchfunc()
+        {
+            try {
+                throw new Autodesk.AutoCAD.Runtime.Exception(ErrorStatus.AnonymousEntry,"không chấp nhân");
+                // đếm số bản vẽ đang mở
+
+            } catch (Autodesk.AutoCAD.Runtime.Exception ex) {
+                Application.ShowAlertDialog("lỗi khi giá trị bằng 9 " + ex.Message);
+                
+            }
+        }
+
+        [CommandMethod("createnewCad")]
+        public void newCad()
+        {
+            DocumentCollection docCol = Application.DocumentManager;
+
+            Document doc1 = docCol.Add(@"C:\Users\minhg\AppData\Local\Autodesk\AutoCAD 2022\R24.1\enu\Template\acadiso.dwt");
+
+            docCol.MdiActiveDocument = doc1;
+        }
+        //DatabaseService
+        [CommandMethod("mgScale")]
+        public void scale()
+        {
+            Database db = Application.DocumentManager.MdiActiveDocument.Database;
+
+            db.Ltscale = 100;
+        }
+        [CommandMethod("getObjecId")]
+        public void getObjecID()
+        {
+            Database db = Application.DocumentManager.MdiActiveDocument.Database;
+            Document doc = Application.DocumentManager.MdiActiveDocument;
+            var ed = doc.Editor;
+
+            ObjectId layerId = db.LayerTableId;
+
+            bool iErr=  layerId.IsErased;
+
+            Transaction trans = db.TransactionManager.StartTransaction();
+
+            LayerTable layertb = trans.GetObject(layerId, OpenMode.ForRead) as LayerTable;
+
+            int count = 0;
+
+            foreach(ObjectId ob in layertb)
+            {
+                count += 1;
+                ed.WriteMessage("hh: "+ ob.OldId.ToString());
+            }
+            // đóng transaction
+            trans.Commit();
+
+            ed.WriteMessage("số lượng layer trong bản vẽ là : " + count);
+
+
+
+
+        }
+
     }
 }
