@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using Autodesk.AutoCAD.ApplicationServices;
+﻿using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
-using Autodesk.AutoCAD.Internal;
 using Autodesk.AutoCAD.Runtime;
-
+using System;
 using AcAp = Autodesk.AutoCAD.ApplicationServices.Application;
 
 [assembly: CommandClass(typeof(AutoCAD.Init))]
@@ -22,14 +15,15 @@ namespace AutoCAD
         {
             int result = Convert.ToInt16(AcAp.GetSystemVariable("DWGTITLED"));
 
-            if (result != 0) {
+            if (result != 0)
+            {
                 return true;
             };
 
             return false;
         }
 
-       
+
 
         [CommandMethod("ctestCmmand")]
         public void cmdFirstCommand()
@@ -37,18 +31,18 @@ namespace AutoCAD
             Document doc = AcAp.DocumentManager.MdiActiveDocument;
             var db = doc.Database;
             var ed = doc.Editor;
-        
+
             if (IsSavedFile())
             {
                 ed.WriteMessage("\n File đả lưu");
-            } 
+            }
             else
             {
                 ed.WriteMessage("\n File chưa lưu");
 
             }
 
-           
+
         }
 
 
@@ -90,13 +84,16 @@ namespace AutoCAD
         [CommandMethod("trycat")]
         public void trycatchfunc()
         {
-            try {
-                throw new Autodesk.AutoCAD.Runtime.Exception(ErrorStatus.AnonymousEntry,"không chấp nhân");
+            try
+            {
+                throw new Autodesk.AutoCAD.Runtime.Exception(ErrorStatus.AnonymousEntry, "không chấp nhân");
                 // đếm số bản vẽ đang mở
 
-            } catch (Autodesk.AutoCAD.Runtime.Exception ex) {
+            }
+            catch (Autodesk.AutoCAD.Runtime.Exception ex)
+            {
                 Application.ShowAlertDialog("lỗi khi giá trị bằng 9 " + ex.Message);
-                
+
             }
         }
 
@@ -126,7 +123,7 @@ namespace AutoCAD
 
             ObjectId layerId = db.LayerTableId;
 
-            bool iErr=  layerId.IsErased;
+            bool iErr = layerId.IsErased;
 
             Transaction trans = db.TransactionManager.StartTransaction();
 
@@ -134,20 +131,69 @@ namespace AutoCAD
 
             int count = 0;
 
-            foreach(ObjectId ob in layertb)
+            foreach (ObjectId ob in layertb)
             {
                 count += 1;
-                ed.WriteMessage("hh: "+ ob.OldId.ToString());
+                ed.WriteMessage("hh: " + ob.OldIdPtr.ToString());
             }
             // đóng transaction
             trans.Commit();
 
             ed.WriteMessage("số lượng layer trong bản vẽ là : " + count);
 
-
-
-
         }
 
+        [CommandMethod("newlayer")]
+        public void newLayer()
+        {
+            Database db = Application.DocumentManager.MdiActiveDocument.Database;
+            Document doc = Application.DocumentManager.MdiActiveDocument;
+            var ed = doc.Editor;
+
+            try
+            {
+                Transaction trans = db.TransactionManager.StartTransaction();
+                ObjectId layerId = db.LayerTableId;
+                LayerTable layertb = trans.GetObject(layerId, OpenMode.ForWrite) as LayerTable;
+
+                string layerName = "New layer";
+                LayerTableRecord layerTbrecog = new LayerTableRecord();
+                if (checkExistedLayer(trans, layertb, layerName))
+                {
+                    throw (new Autodesk.AutoCAD.Runtime.Exception(ErrorStatus.AnonymousEntry, "tên Layer đã tồn tại"));
+                }
+                layerTbrecog.Name = layerName;
+                layertb.Add(layerTbrecog);
+                trans.AddNewlyCreatedDBObject(layerTbrecog, true);
+                trans.Commit();
+            }
+
+            catch (Autodesk.AutoCAD.Runtime.Exception ex)
+            {
+                Application.ShowAlertDialog("lỗi: " + ex.Message);
+            }
+
+        }
+        #region suport method
+        public Boolean checkExistedLayer(Transaction trans, LayerTable layerTb, String layerName)
+        {
+            LayerTableRecord layerTbRecog;
+            foreach (ObjectId ob in layerTb)
+            {
+                layerTbRecog = trans.GetObject(ob, OpenMode.ForRead) as LayerTableRecord;
+
+                if (layerTbRecog.Name == layerName)
+                {
+                    return true;
+                }
+
+
+            }
+            return false;
+        }
+
+        #endregion
     }
+
+
 }

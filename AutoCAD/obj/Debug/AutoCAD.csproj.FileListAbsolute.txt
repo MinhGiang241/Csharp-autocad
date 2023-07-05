@@ -7,3 +7,12 @@ C:\Users\minhg\Downloads\Projects\NET\autocad\AutoCAD\AutoCAD\obj\Debug\AutoCAD.
 C:\Users\minhg\Downloads\Projects\NET\autocad\AutoCAD\AutoCAD\obj\Debug\AutoCAD.csproj.CoreCompileInputs.cache
 C:\Users\minhg\Downloads\Projects\NET\autocad\AutoCAD\AutoCAD\obj\Debug\AutoCAD.dll
 C:\Users\minhg\Downloads\Projects\NET\autocad\AutoCAD\AutoCAD\obj\Debug\AutoCAD.pdb
+D:\Apps\dotnet\Csharp-autocad\AutoCAD\bin\Debug\start.scr
+D:\Apps\dotnet\Csharp-autocad\AutoCAD\bin\Debug\AutoCAD.dll
+D:\Apps\dotnet\Csharp-autocad\AutoCAD\bin\Debug\AutoCAD.pdb
+D:\Apps\dotnet\Csharp-autocad\AutoCAD\obj\Debug\AutoCAD.csproj.AssemblyReference.cache
+D:\Apps\dotnet\Csharp-autocad\AutoCAD\obj\Debug\AutoCAD.MyCommands.resources
+D:\Apps\dotnet\Csharp-autocad\AutoCAD\obj\Debug\AutoCAD.csproj.GenerateResource.cache
+D:\Apps\dotnet\Csharp-autocad\AutoCAD\obj\Debug\AutoCAD.csproj.CoreCompileInputs.cache
+D:\Apps\dotnet\Csharp-autocad\AutoCAD\obj\Debug\AutoCAD.dll
+D:\Apps\dotnet\Csharp-autocad\AutoCAD\obj\Debug\AutoCAD.pdb
