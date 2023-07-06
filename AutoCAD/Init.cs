@@ -23,6 +23,14 @@ namespace AutoCAD
             return false;
         }
 
+        [CommandMethod("wpf")]
+        public void Wpf()
+        {
+            Window1 win = new Window1();
+
+            Application.ShowModalWindow(Application.MainWindow.Handle, win);
+        }
+
 
 
         [CommandMethod("ctestCmmand")]
@@ -174,6 +182,9 @@ namespace AutoCAD
             }
 
         }
+
+
+
         #region suport method
         public Boolean checkExistedLayer(Transaction trans, LayerTable layerTb, String layerName)
         {
